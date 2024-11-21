@@ -1,0 +1,20 @@
+linear function
+gradient descent algorithm
+
+program 1:
+
+    predict price of car for a given mileage.
+    Launch program, prompt for a mileage and give estimated price for mileage
+    estimatePrice(mileage) = θ0 + (θ1 ∗ mileage)
+    Before the run of the training program, theta0 and theta1 will be set to 0.
+
+program 2:
+
+    train model. read dataset file and linear regression data.
+    Once the linear regression has completed, you will save the variables theta0 and theta1 for use in the first program.
+    Standarize instead of normalise because data is evenly set
+
+    standardized_mileage= std_mileage / mileages−mean_mileage
+    Standardization ensures that the data has a mean of 0 and a standard deviation of 1, which helps gradient descent converge more efficiently.
+​	
+ 
