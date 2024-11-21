@@ -1,9 +1,21 @@
 import sys
 import pandas as pd
+import os
 
 def load_model(filename='model.txt'):
+    if not os.path.exists(filename):
+        print(f"File '{filename}' does not exist. Exiting...")
+        sys.exit(1)
     with open(filename, 'r') as file:
-        theta0, theta1 = map(float, file.read().split(','))
+            content = file.read().strip()
+            
+            parts = content.split(',')
+            if len(parts) != 2:
+                exit("Invalid model file")
+            if parts[0] == '' or parts[1] == '':
+                exit("Invalid model file")
+
+            theta0, theta1 = map(float, parts)
     return theta0, theta1
 
 def load_data(filename):
@@ -11,6 +23,9 @@ def load_data(filename):
     return data['km'].values, data['price'].values
 
 def estimate_price(mileage, theta0, theta1):
+    if mileage < 0:
+        print("The mileage should be a positive number")
+        sys.exit(1)
     return theta0 + theta1 * mileage
 
 def check_if_float(s):
@@ -41,9 +56,9 @@ def main():
         else:
             mileage = float(mileage)
         predicted_price = estimate_price(mileage, theta0, theta1)
-        print()
-        print(f'The estimated price for a car with {mileage} mileage is: {predicted_price}')
-        print()
+        if predicted_price < 0:
+            predicted_price = 0
+        print(f'\nThe estimated price for a car with {mileage} mileage is: {predicted_price}\n')
         mileages, prices = load_data('data.csv')
         for i in range(len(prices)):
             if mileage == mileages[i]:

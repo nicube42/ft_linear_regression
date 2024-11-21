@@ -70,8 +70,8 @@ def compute_mae(prices, predicted_prices):
 
 def main():
     filename = 'data.csv'
-    learning_rate = 1e-5
-    num_iterations = 2000000
+    learning_rate = 0.01
+    num_iterations = 2000
     
     mileages, prices = load_data(filename)
     theta0, theta1 = train_linear_regression(mileages, prices, learning_rate, num_iterations)
