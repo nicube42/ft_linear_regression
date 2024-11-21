@@ -13,10 +13,33 @@ def load_data(filename):
 def estimate_price(mileage, theta0, theta1):
     return theta0 + theta1 * mileage
 
+def check_if_float(s):
+    dot_count = 0
+
+    for char in s:
+        if char.isdigit():
+            continue
+        elif char == '.':
+            dot_count += 1
+        else:
+            return False
+
+    if dot_count <= 1:
+        return True
+    else:
+        return False
+
 def main():
     theta0, theta1 = load_model()
     if len(sys.argv) == 1:
-        mileage = float(input("Enter the mileage of the car: "))
+        mileage = input("Enter the mileage of the car: ")
+        if check_if_float(mileage):
+            mileage = float(mileage)
+        elif not mileage.isdigit():
+            print("The mileage should be a number. If float use a point and not a comma\n")
+            sys.exit(1)
+        else:
+            mileage = float(mileage)
         predicted_price = estimate_price(mileage, theta0, theta1)
         print()
         print(f'The estimated price for a car with {mileage} mileage is: {predicted_price}')
