@@ -1,8 +1,13 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
+import sys
 
 def load_data(filename):
+    if not os.path.exists(filename):
+        print(f"File '{filename}' does not exist. Exiting...")
+        sys.exit(1)
     data = pd.read_csv(filename)
     return data['km'].values, data['price'].values
 

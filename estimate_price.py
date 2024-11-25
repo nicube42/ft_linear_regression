@@ -47,6 +47,9 @@ def check_if_float(s):
 def main():
     theta0, theta1 = load_model()
     if len(sys.argv) == 1:
+        if not os.path.exists("data.csv"):
+            print(f"File data.csv does not exist. Exiting...")
+            sys.exit(1)
         mileage = input("Enter the mileage of the car: ")
         if check_if_float(mileage):
             mileage = float(mileage)
